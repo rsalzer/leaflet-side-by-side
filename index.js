@@ -130,10 +130,16 @@ L.Control.SideBySide = L.Control.extend({
     var clipLeft = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)'
     var clipRight = 'rect(' + [nw.y, se.x, se.y, clipX].join('px,') + 'px)'
     if (this._leftLayer) {
-      this._leftLayer.getContainer().style.clip = clipLeft
+      const leftContainer =  this._leftLayer.getContainer()
+      leftContainer.style.clip = 'unset'
+      leftContainer.offsetWidth; // forces re-calculation
+      leftContainer.style.clip = clipLeft
     }
     if (this._rightLayer) {
-      this._rightLayer.getContainer().style.clip = clipRight
+      const rightContainer = this._rightLayer.getContainer()
+      rightContainer.style.clip = 'unset'
+      rightContainer.offsetWidth; // forces re-calculation
+      rightContainer.style.clip = clipRight
     }
   },
 
